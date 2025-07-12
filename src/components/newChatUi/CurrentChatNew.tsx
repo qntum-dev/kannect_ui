@@ -25,13 +25,12 @@ const CurrentChatNew = ({ chat }: { chat: ChatData }) => {
     const chatIdRef = useRef(chat.chat_id);
 
     const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useChatMessages(chat.chat_id);
-    const allMessages = data?.pages.flatMap(page => page) || [];
-
     const messages = useMemo(() => {
+        const allMessages = data?.pages.flatMap(page => page) || [];
         return allMessages
             .filter(Boolean)
             .sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
-    }, [allMessages]);
+    }, [data]);
 
     useEffect(() => {
         if (chatIdRef.current !== chat.chat_id) {

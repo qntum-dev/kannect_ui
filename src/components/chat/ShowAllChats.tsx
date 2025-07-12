@@ -2,7 +2,6 @@
 
 
 import StartNewChatForm from "./StartNewChatForm";
-import CurrentChat from "./CurrentChat";
 import ChatList from "./ChatList";
 import { ChatClientProvider } from "../providers/ChatContextProvider";
 import { useCurrentChatStore } from "../stores/chat-store";
