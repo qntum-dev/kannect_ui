@@ -44,7 +44,7 @@ const ActiveChatWindow = ({ chat }: { chat: StartChatData }) => {
         dm.socket.on("message", handleMessage);
 
         return dm;
-    }, [chat]);
+    }, [chat, user]);
 
     const [dmClient, setDmClient] = useState<StreamInOut<newChat.ReceiveMessage, newChat.SendMessage> | null>(null);
 

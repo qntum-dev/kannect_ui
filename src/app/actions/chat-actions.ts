@@ -59,7 +59,7 @@ export const findUser = async (id: string): Promise<FindUserResp> => {
 // interface 
 export const startChat = async (userID: string): Promise<{ status: boolean }> => {
 
-    const resp = await apiHandler<StartChatBody, StartChatResp>("start-chat", {
+    const resp = await apiHandler<StartChatBody, StartChatResp>("/start-chat", {
         userB: userID
     }, "post")
     if (resp.data?.chatID) return {

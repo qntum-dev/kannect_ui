@@ -104,9 +104,15 @@ const ConversationCard = ({ chat }: { chat: ChatData }) => {
     return (
         <div
             onClick={async () => {
+                console.log("Clicked chat:", chat);
+
                 if (activeChat?.chat_id !== chat.chat_id) {
+                    // console.log("Setting active chat:", chat);
+
                     const { status } = await startChat(chat.receiverId);
+                    console.log("Start chat status:", status);
                     if (status) {
+                        console.log("Setting active chat:", chat);
                         setActiveChat(chat);
                     }
                 }
