@@ -32,13 +32,13 @@ export function ChatSidebar() {
                     <NewChatDialog />
                 </div>
             </SidebarHeader>
-            <SidebarContent className="mx-4 lg:mx-7 mt-3">
+            <SidebarContent className="mx-2 lg:mx-4 mt-3">
                 <ChatList />
 
             </SidebarContent>
 
             <SidebarFooter>
-                <div className="bg-primary flex items-center py-2 px-3 rounded-full justify-between mx-2 lg:mx-8 mb-9">
+                <div className="bg-primary flex items-center py-2 px-3 rounded-full justify-between mx-2 lg:mx-8 mb-4">
                     <div className="flex items-center gap-3">
                         <div>
                             <Image

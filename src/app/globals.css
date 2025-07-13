@@ -112,6 +112,30 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Hide scrollbar for Chrome, Safari, and Edge */
+/* .hide-scrollbar::-webkit-scrollbar {
+  display: none;
+} */
+
+/* Hide scrollbar for Firefox */
+/* .hide-scrollbar {
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+} */
+
+/* Custom Scrollbar Styling */
+
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #326ac3 transparent;
+}
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

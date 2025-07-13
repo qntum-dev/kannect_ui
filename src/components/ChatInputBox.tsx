@@ -1,40 +1,61 @@
-import React, { useRef, useEffect, Dispatch, SetStateAction } from 'react';
+import React, { useRef, useEffect, Dispatch, SetStateAction, useState } from 'react';
 import { SendHorizonal } from 'lucide-react';
 
-const ChatInputBox = ({ newMessage, setNewMessage, handleSendMessage }: {
+const ChatInputBox = ({
+    newMessage,
+    setNewMessage,
+    handleSendMessage
+}: {
     newMessage: string,
     setNewMessage: Dispatch<SetStateAction<string>>,
     handleSendMessage: () => void
 }) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [bottomInset, setBottomInset] = useState(0);
     useEffect(() => {
-        if (textareaRef.current) {
-            textareaRef.current.focus();
+        const textarea = textareaRef.current;
+        if (textarea) {
+            textarea.readOnly = true;
+            textarea.focus();
+            textarea.readOnly = false;
         }
     }, []);
+    // Visual viewport listener to adjust padding when keyboard opens
+    useEffect(() => {
 
-    // Extract auto-resize logic to a separate function
+        const vv = window.visualViewport;
+        if (vv) {
+
+            const handleViewportResize = () => {
+                const heightDiff = vv.height < window.innerHeight ? window.innerHeight - vv.height : 0;
+                setBottomInset(heightDiff);
+            };
+
+            vv.addEventListener('resize', handleViewportResize);
+            vv.addEventListener('scroll', handleViewportResize);
+
+            return () => {
+                vv.removeEventListener('resize', handleViewportResize);
+                vv.removeEventListener('scroll', handleViewportResize);
+            };
+        }
+
+    }, []);
+
     const resizeTextarea = () => {
         const textarea = textareaRef.current;
         if (textarea) {
-            textarea.style.height = '40px'; // Reset to minimum height
+            textarea.style.height = '40px';
             const scrollHeight = textarea.scrollHeight;
-            const maxHeight = 200; // 8 lines approximately
-
-            if (scrollHeight <= maxHeight) {
-                textarea.style.height = `${scrollHeight}px`;
-                textarea.style.overflowY = 'hidden';
-            } else {
-                textarea.style.height = `${maxHeight}px`;
-                textarea.style.overflowY = 'auto';
-            }
+            const maxHeight = 200;
+            textarea.style.height = `${Math.min(scrollHeight, maxHeight)}px`;
+            textarea.style.overflowY = scrollHeight > maxHeight ? 'auto' : 'hidden';
         }
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const value = e.target.value;
-        setNewMessage(value);
+        setNewMessage(e.target.value);
         resizeTextarea();
     };
 
@@ -45,16 +66,26 @@ const ChatInputBox = ({ newMessage, setNewMessage, handleSendMessage }: {
         }
     };
 
-    // Resize on mount and when newMessage changes externally
     useEffect(() => {
         resizeTextarea();
     }, [newMessage]);
 
+    const handleFocus = () => {
+        textareaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
     return (
-        <div className="w-full mx-auto relative">
-            {/* Message Input Container - Fixed at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 border-t bg-secondary">
-                <div className=" mx-auto p-2 lg:p-4">
+        <div
+            ref={containerRef}
+            className="flex flex-col justify-between "
+            style={{ paddingBottom: bottomInset }}
+        >
+            {/* Chat Messages */}
+
+
+            {/* Input */}
+            <div className="border-t bg-secondary">
+                <div className="p-2 lg:p-4">
                     <div className="flex items-end bg-white rounded-md px-4 py-2 shadow-md lg:mx-12">
                         <div className="flex-1 relative">
                             <textarea
@@ -64,10 +95,10 @@ const ChatInputBox = ({ newMessage, setNewMessage, handleSendMessage }: {
                                 value={newMessage}
                                 onChange={handleInputChange}
                                 onKeyDown={handleKeyDown}
+                                onFocus={handleFocus}
                                 rows={1}
                                 style={{
                                     minHeight: '40px',
-                                    height: '40px',
                                     lineHeight: '20px',
                                     padding: '10px 0',
                                     fontSize: '16px',
@@ -78,8 +109,6 @@ const ChatInputBox = ({ newMessage, setNewMessage, handleSendMessage }: {
                                     className="absolute top-0 left-0 pointer-events-none select-none text-[#8696A0]"
                                     style={{
                                         fontSize: '16px',
-                                        // lineHeight: '40px', // Match the textarea's initial height
-                                        color: '#8696A0',
                                         padding: '10px 0',
                                     }}
                                 >
@@ -97,9 +126,6 @@ const ChatInputBox = ({ newMessage, setNewMessage, handleSendMessage }: {
                     </div>
                 </div>
             </div>
-
-            {/* Spacer to prevent content from being hidden behind fixed input */}
-            <div className="h-20"></div>
         </div>
     );
 };

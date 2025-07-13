@@ -239,7 +239,7 @@ const CurrentChatNew = ({ chat }: { chat: ChatData }) => {
                         return (
                             <div key={message.id} className={`flex ${isCurrentUser ? 'justify-end' : 'justify-start'} w-full px-2 py-1`}>
                                 <div
-                                    className={`px-4 py-2 rounded-2xl max-w-[40%] break-words text-sm ${isCurrentUser ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
+                                    className={`px-4 py-2 rounded-2xl max-w-[80%] break-words text-sm ${isCurrentUser ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
                                 >
                                     <div className="text-sm">
 

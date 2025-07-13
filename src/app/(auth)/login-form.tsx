@@ -35,6 +35,8 @@ export default function LoginForm() {
         }
     })
 
+
+
     const onSubmit = async (values: LoginSchemaType) => {
         startTransition(async () => {
             const result = await loginAction(values)
@@ -63,7 +65,7 @@ export default function LoginForm() {
     return (
         <div className="w-full max-w-sm">
             <Form {...form}>
-                <form className="flex flex-col gap-6  p-4 rounded-md bg-[#1f2736]" onSubmit={form.handleSubmit(onSubmit)}>
+                <form className="flex flex-col gap-6  p-4 rounded-md bg-secondary" onSubmit={form.handleSubmit(onSubmit)}>
                     <h2 className="text-xl font-bold text-center">
                         Log in to Your Account
                     </h2>
