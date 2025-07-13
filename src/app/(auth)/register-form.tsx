@@ -69,7 +69,7 @@ export default function RegisterForm() {
     return (
         <div className="w-full max-w-sm ">
             <Form {...form}>
-                <form className="flex flex-col gap-6 border border-black p-4 rounded-md" onSubmit={form.handleSubmit(onSubmit)}>
+                <form className="flex flex-col gap-6 bg-[#1f2736] p-4 rounded-md" onSubmit={form.handleSubmit(onSubmit)}>
                     <h2 className="text-xl font-bold text-center">
                         Create Your Account
                     </h2>
@@ -133,7 +133,7 @@ export default function RegisterForm() {
                             {form.formState.errors.root.message}
                         </div>
                     )}
-                    <Button type="submit" className="w-full bg-blue-600 cursor-pointer" disabled={isPending}
+                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-800 cursor-pointer text-white text-base" disabled={isPending}
                     >
                         {isPending ? (
                             <>
@@ -141,16 +141,16 @@ export default function RegisterForm() {
                                 Creating account...
                             </>
                         ) : (
-                            "Signup"
+                            "Sign up"
                         )}
                     </Button>
 
                     <hr className="border-t border-gray-400 w-full" />
                     <div className="text-center">
                         Already have an account? {" "}
-                        <a href="/login" className="text-blue-600">
+                        <a href="/login" className="text-blue-400 hover:text-blue-600">
 
-                            Login
+                            Log in
                         </a>
                     </div>
                 </form>

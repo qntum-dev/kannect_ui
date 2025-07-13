@@ -26,12 +26,29 @@ export const registerAction = async (data: RegisterSchemaType): Promise<AuthResp
 
 }
 
+// export const loginAction = async (data: LoginSchemaType): Promise<AuthResponse> => {
+
+//     console.log("Form submitted:", data)
+
+//     const response = await apiHandler<LoginSchemaType, { userData: PublicUser }>(
+//         "/user/login",
+//         data,
+//         "post"
+//     );
+//     return {
+//         success: response.success,
+//         data: response.data,
+//         error: response.error
+//     };
+
+// }
+
 export const loginAction = async (data: LoginSchemaType): Promise<AuthResponse> => {
 
     console.log("Form submitted:", data)
 
     const response = await apiHandler<LoginSchemaType, { userData: PublicUser }>(
-        "/user/login",
+        "/user/loginRaw",
         data,
         "post"
     );
@@ -42,7 +59,6 @@ export const loginAction = async (data: LoginSchemaType): Promise<AuthResponse> 
     };
 
 }
-
 type sendOTPStatus = ApiResponse<{ status: string }>
 
 export const sendACVerification = async (): Promise<sendOTPStatus> => {

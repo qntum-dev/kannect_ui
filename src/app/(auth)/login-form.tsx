@@ -63,7 +63,7 @@ export default function LoginForm() {
     return (
         <div className="w-full max-w-sm">
             <Form {...form}>
-                <form className="flex flex-col gap-6 border border-black p-4 rounded-md" onSubmit={form.handleSubmit(onSubmit)}>
+                <form className="flex flex-col gap-6  p-4 rounded-md bg-[#1f2736]" onSubmit={form.handleSubmit(onSubmit)}>
                     <h2 className="text-xl font-bold text-center">
                         Log in to Your Account
                     </h2>
@@ -127,7 +127,7 @@ export default function LoginForm() {
 
                     <Button
                         type="submit"
-                        className="w-full bg-blue-600 cursor-pointer"
+                        className="w-full bg-blue-600 hover:bg-blue-800 cursor-pointer text-white text-base"
                         disabled={isPending}
                     >
                         {isPending ? (
@@ -136,14 +136,15 @@ export default function LoginForm() {
                                 Logging in...
                             </>
                         ) : (
-                            "Login"
+                            "Log in"
                         )}
                     </Button>
 
                     <hr className="border-t border-gray-400 w-full" />
                     <div className="text-center">
-                        <a href="/register" className="text-blue-600" tabIndex={isPending ? -1 : 0}>
-                            Create an account?
+                        <span>Don&apos;t have an account? </span>
+                        <a href="/register" className="text-blue-400 hover:text-blue-600" tabIndex={isPending ? -1 : 0}>
+                            Sign Up
                         </a>
                     </div>
                 </form>

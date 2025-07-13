@@ -9,6 +9,7 @@ import { Loader2 } from "lucide-react";
 import { ChatData } from "@/lib/types";
 import { findUser, startNewChat } from "@/app/actions/chat-actions";
 import { useChatUserStore, useCurrentChatStore } from "../stores/chat-store";
+import { useSidebar } from "../ui/sidebar";
 
 const formSchema = z.object(
     {
@@ -22,6 +23,7 @@ const StartNewChatForm = () => {
     const [error, setError] = useState<string | null>();
     // const [user, setUser] = useState<PublicUser | null>()
     const { addOrUpdateUser } = useChatUserStore();
+    const { setOpenMobile } = useSidebar();
 
 
     const form = useForm<FormSchemaType>({
@@ -60,6 +62,7 @@ const StartNewChatForm = () => {
             }
 
             setActiveChat(newData);
+            setOpenMobile(false);
 
         })
     }

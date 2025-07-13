@@ -21,6 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { ChatData } from "@/lib/types"
 import { findUser, startNewChat } from "@/app/actions/chat-actions"
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form"
+import { useSidebar } from "../ui/sidebar"
 
 const formSchema = z.object({
     email: z.string().email("Enter a valid email address"),
@@ -34,6 +35,7 @@ export function NewChatDialog() {
     const [error, setError] = useState<string | null>(null)
     const { addOrUpdateUser } = useChatUserStore();
     const [open, setOpen] = useState(false);
+    const { setOpenMobile } = useSidebar();
 
     const form = useForm<FormSchemaType>({
         resolver: zodResolver(formSchema),
@@ -68,6 +70,8 @@ export function NewChatDialog() {
             setActiveChat(newData)
             form.reset() // clear after submission
             setOpen(false) // close dialog after successful chat start
+            setOpenMobile(false);
+
         })
     }
 
