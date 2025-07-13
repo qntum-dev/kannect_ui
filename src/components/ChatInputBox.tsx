@@ -54,8 +54,8 @@ const ChatInputBox = ({ newMessage, setNewMessage, handleSendMessage }: {
         <div className="w-full mx-auto relative">
             {/* Message Input Container - Fixed at bottom */}
             <div className="absolute bottom-0 left-0 right-0 border-t bg-secondary">
-                <div className=" mx-auto p-4">
-                    <div className="flex items-end bg-white rounded-md px-4 py-2 shadow-md mx-12">
+                <div className=" mx-auto p-2 lg:p-4">
+                    <div className="flex items-end bg-white rounded-md px-4 py-2 shadow-md lg:mx-12">
                         <div className="flex-1 relative">
                             <textarea
                                 ref={textareaRef}
