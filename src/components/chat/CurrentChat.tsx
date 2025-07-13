@@ -9,13 +9,14 @@ import { InfiniteData, useQueryClient } from '@tanstack/react-query';
 import { useChatClient } from '../providers/ChatContextProvider';
 import ActiveChatHeaderCard from '../ActiveChatHeaderCard';
 import ChatInputBox from '../ChatInputBox';
+import { useAuthStore } from '../stores/auth-store';
 
 const CurrentChat = ({ chat }: { chat: ChatData }) => {
     const [newMessage, setNewMessage] = useState('');
     const [dmClient, setDmClient] = useState<StreamInOut<newChat.ReceiveMessage, newChat.SendMessage> | null>(null);
     const dmClientRef = useRef<StreamInOut<newChat.ReceiveMessage, newChat.SendMessage> | null>(null);
 
-
+    const { user } = useAuthStore();
     const scrollMetaRef = useRef<{
         prevScrollHeight: number;
         prevScrollTop: number;
@@ -168,7 +169,7 @@ const CurrentChat = ({ chat }: { chat: ChatData }) => {
         const initializeDM = async () => {
             try {
                 console.log("Initializing DM for chat:", chat.chat_id);
-                const dmClient = await chatClient.newChat.privateChat({ chatID: chat.chat_id });
+                const dmClient = await chatClient.newChat.privateChat({ chatID: chat.chat_id, userID: user!.id });
 
                 setDmClient(dmClient);
                 dmClientRef.current = dmClient;

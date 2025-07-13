@@ -18,26 +18,30 @@ const Page = () => {
     }
 
     return (
-        <ChatClientProvider url={process.env.NEXT_PUBLIC_CHAT_URL!} userID={user!.id}>
+        !user?.id ? (
+            <div>Loading</div>
+        ) : (
+            <ChatClientProvider url={process.env.NEXT_PUBLIC_CHAT_URL!} userID={user!.id}>
 
-            <div>
-                <SidebarProvider>
-                    <ChatSidebar />
-                    <div className="md:hidden">
-                        <SidebarTrigger />
-                    </div>
-                    <div className="w-full">
-                        {activeChat ? (
-                            <CurrentChatNew key={activeChat.chat_id} chat={activeChat} />
-                        ) : (
-                            <div className="h-full flex items-center justify-center text-gray-500">
-                                Select a chat to start messaging
-                            </div>
-                        )}
-                    </div>
-                </SidebarProvider>
-            </div>
-        </ChatClientProvider>
+                <div>
+                    <SidebarProvider>
+                        <ChatSidebar />
+                        <div className="md:hidden">
+                            <SidebarTrigger />
+                        </div>
+                        <div className="w-full">
+                            {activeChat ? (
+                                <CurrentChatNew key={activeChat.chat_id} chat={activeChat} />
+                            ) : (
+                                <div className="h-full flex items-center justify-center text-gray-500">
+                                    Select a chat to start messaging
+                                </div>
+                            )}
+                        </div>
+                    </SidebarProvider>
+                </div>
+            </ChatClientProvider>
+        )
     )
 
 }
