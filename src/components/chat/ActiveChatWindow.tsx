@@ -4,13 +4,14 @@ import { useChatMessages } from "@/app/hooks/chat";
 import Client, { newChat, StreamInOut } from "@/lib/chatClient";
 import { StartChatData, Message } from "@/lib/types";
 import { useState, useMemo, useEffect, useCallback } from "react";
+import { useAuthStore } from "../stores/auth-store";
 
 const chatClient = new Client(process.env.NEXT_PUBLIC_CHAT_URL!);
 
 const ActiveChatWindow = ({ chat }: { chat: StartChatData }) => {
     const [newMessage, setNewMessage] = useState("");
     const [liveMessages, setLiveMessages] = useState<Message[]>([]);
-
+    const { user } = useAuthStore();
     const {
         data,
 
@@ -29,7 +30,7 @@ const ActiveChatWindow = ({ chat }: { chat: StartChatData }) => {
     const setupDMClient = useCallback(async () => {
         console.log(chat);
 
-        const dm = await chatClient.newChat.privateChat({ chatID: chat.chat_id });
+        const dm = await chatClient.newChat.privateChat({ chatID: chat.chat_id, userID: user!.id });
 
         const handleMessage = (data: { data: string }) => {
             const parsedData = JSON.parse(data.data) as Message;
