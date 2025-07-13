@@ -3,9 +3,6 @@ import { apiHandler } from "@/lib/api-handler";
 import { getAuthCookie } from "@/lib/cookie";
 import { NextRequest, NextResponse } from "next/server";
 
-// import { baseURL } from "./app/config";
-// import axios from "axios";
-// import { api } from "./app/utils/helpers/axios";
 type validAuthResponse = { status: string }
 
 export async function middleware(request: NextRequest) {
@@ -40,7 +37,7 @@ export async function middleware(request: NextRequest) {
             console.log(verify, "line 36");
 
             if (verify.data?.status === "verified") {
-                url.pathname = "/chat";
+                url.pathname = "/";
                 return NextResponse.redirect(url);
             }
             return NextResponse.next();

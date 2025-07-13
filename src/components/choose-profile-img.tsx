@@ -149,7 +149,7 @@ const ChooseProfileImg = () => {
                         Re-upload
                     </Button>
                     <Button
-                        onClick={() => router.push("/newChat")} // or your next onboarding route
+                        onClick={() => router.push("/")} // or your next onboarding route
                         className="mt-2 w-40"
                     >
                         Next
