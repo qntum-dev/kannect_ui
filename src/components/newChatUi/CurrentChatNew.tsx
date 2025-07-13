@@ -9,9 +9,11 @@ import { InfiniteData, useQueryClient } from '@tanstack/react-query';
 import { useChatClient } from '../providers/ChatContextProvider';
 import ActiveChatHeaderCard from '../ActiveChatHeaderCard';
 import ChatInputBox from '../ChatInputBox';
+import { useAuthStore } from '../stores/auth-store';
 
 const CurrentChatNew = ({ chat }: { chat: ChatData }) => {
     const [newMessage, setNewMessage] = useState('');
+    const { user } = useAuthStore();
     const [dmClient, setDmClient] = useState<StreamInOut<newChat.ReceiveMessage, newChat.SendMessage> | null>(null);
     const dmClientRef = useRef<typeof dmClient>(null);
     const virtuosoRef = useRef<VirtuosoHandle>(null);
@@ -123,8 +125,11 @@ const CurrentChatNew = ({ chat }: { chat: ChatData }) => {
 
         const initializeDM = async () => {
             try {
-                const dmClientInstance = await chatClient.newChat.privateChat({ chatID: chat.chat_id });
+
+                const dmClientInstance = await chatClient.newChat.privateChat({ chatID: chat.chat_id, userID: user!.id });
+
                 setDmClient(dmClientInstance);
+
                 dmClientRef.current = dmClientInstance;
                 dmClientInstance.socket.on('message', handleIncomingMessage);
             } catch (error) {

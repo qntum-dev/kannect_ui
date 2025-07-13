@@ -5,7 +5,7 @@ import Client, { newChat, StreamInOut } from "@/lib/chatClient";
 import { StartChatData, Message } from "@/lib/types";
 import { useState, useMemo, useEffect, useCallback } from "react";
 
-const chatClient = new Client("http://localhost:4000");
+const chatClient = new Client(process.env.NEXT_PUBLIC_CHAT_URL!);
 
 const ActiveChatWindow = ({ chat }: { chat: StartChatData }) => {
     const [newMessage, setNewMessage] = useState("");

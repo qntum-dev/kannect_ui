@@ -21,9 +21,10 @@ export const useChatClient = () => {
 type Props = {
     children: ReactNode;
     url: string;
+    userID: string;
 };
 
-export const ChatClientProvider = ({ children, url }: Props) => {
+export const ChatClientProvider = ({ children, url, userID }: Props) => {
     const [chatClient, setChatClient] = useState<Client | null>(null);
     const [chatListClient, setChatListClient] =
         useState<StreamInOut<newChat.ChatListStreamReq, newChat.ChatListStreamRes> | null>(null);
@@ -31,14 +32,16 @@ export const ChatClientProvider = ({ children, url }: Props) => {
     useEffect(() => {
         async function initializeClients() {
             const client = new Client(url);
-            const listClient = await client.newChat.chatListStream();
+            const listClient = await client.newChat.chatListStream({
+                userID
+            });
 
             setChatClient(client);
             setChatListClient(listClient);
         }
 
         initializeClients();
-    }, [url]);
+    }, [url, userID]);
 
     return (
         <ChatClientContext.Provider value={{ chatClient, chatListClient }}>

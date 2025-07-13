@@ -2,16 +2,23 @@
 import { ChatSidebar } from "@/components/chatSideBar/chat-sidebar";
 import CurrentChatNew from "@/components/newChatUi/CurrentChatNew";
 import { ChatClientProvider } from "@/components/providers/ChatContextProvider";
+import { useAuthStore } from "@/components/stores/auth-store";
 import { useCurrentChatStore } from "@/components/stores/chat-store";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 const Page = () => {
     const { chat: activeChat } = useCurrentChatStore();
+    const { user } = useAuthStore();
+
     console.log("active chat:", activeChat);
 
 
+    if (!user?.id) {
+        return <div>Loading</div>;
+    }
+
     return (
-        <ChatClientProvider url="https://kannect-10.onrender.com">
+        <ChatClientProvider url={process.env.NEXT_PUBLIC_CHAT_URL!} userID={user!.id}>
 
             <div>
                 <SidebarProvider>
@@ -31,7 +38,8 @@ const Page = () => {
                 </SidebarProvider>
             </div>
         </ChatClientProvider>
-    );
+    )
+
 }
 
 export default Page;
