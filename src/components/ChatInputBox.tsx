@@ -8,6 +8,11 @@ const ChatInputBox = ({ newMessage, setNewMessage, handleSendMessage }: {
 }) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+    useEffect(() => {
+        if (textareaRef.current) {
+            textareaRef.current.focus();
+        }
+    }, []);
 
     // Extract auto-resize logic to a separate function
     const resizeTextarea = () => {

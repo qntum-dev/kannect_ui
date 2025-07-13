@@ -62,6 +62,9 @@ export const startChat = async (userID: string): Promise<{ status: boolean }> =>
     const resp = await apiHandler<StartChatBody, StartChatResp>("/start-chat", {
         userB: userID
     }, "post")
+
+    console.log(resp);
+
     if (resp.data?.chatID) return {
         status: true
     }

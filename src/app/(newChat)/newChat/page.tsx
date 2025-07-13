@@ -10,8 +10,6 @@ const Page = () => {
     const { chat: activeChat } = useCurrentChatStore();
     const { user } = useAuthStore();
 
-    console.log("active chat:", activeChat);
-
 
     if (!user?.id) {
         return <div>Loading</div>;
