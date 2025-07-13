@@ -4,7 +4,7 @@ import CurrentChatNew from "@/components/newChatUi/CurrentChatNew";
 import { ChatClientProvider } from "@/components/providers/ChatContextProvider";
 import { useAuthStore } from "@/components/stores/auth-store";
 import { useCurrentChatStore } from "@/components/stores/chat-store";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 const Page = () => {
   const { chat: activeChat } = useCurrentChatStore();
@@ -24,9 +24,7 @@ const Page = () => {
         <div>
           <SidebarProvider>
             <ChatSidebar />
-            <div className="md:hidden">
-              <SidebarTrigger />
-            </div>
+
             <div className="w-full">
               {activeChat ? (
                 <CurrentChatNew key={activeChat.chat_id} chat={activeChat} />
