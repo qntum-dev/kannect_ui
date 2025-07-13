@@ -191,7 +191,7 @@ const CurrentChat = ({ chat }: { chat: ChatData }) => {
                 dmClientInstance.socket.close();
             }
         };
-    }, [chatClient, chat.chat_id, handleIncomingMessage]);
+    }, [chatClient, chat.chat_id, handleIncomingMessage, user]);
 
 
 

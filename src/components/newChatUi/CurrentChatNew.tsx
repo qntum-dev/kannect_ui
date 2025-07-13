@@ -143,7 +143,7 @@ const CurrentChatNew = ({ chat }: { chat: ChatData }) => {
             dmClientRef.current?.socket?.off('message', handleIncomingMessage);
             dmClientRef.current?.socket?.close();
         };
-    }, [chatClient, chat.chat_id, handleIncomingMessage]);
+    }, [chatClient, chat.chat_id, handleIncomingMessage, user]);
 
     const handleSendMessage = async () => {
         if (!newMessage.trim() || !dmClient) return;
