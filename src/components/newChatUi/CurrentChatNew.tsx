@@ -188,7 +188,7 @@ const CurrentChatNew = ({ chat }: { chat: ChatData }) => {
         <div className="flex flex-col h-full">
             <ActiveChatHeaderCard />
 
-            <div className="flex-1 overflow-hidden h-[70dvh] w-full rounded mb-4 relative">
+            <div className="flex-1 overflow-hidden h-[70dvh] w-full rounded mb-4 relative custom-scrollbar">
                 <Virtuoso
                     ref={virtuosoRef}
                     data={messages}

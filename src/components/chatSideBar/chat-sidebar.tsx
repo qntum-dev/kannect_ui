@@ -12,6 +12,7 @@ import { LogOut, Moon, Sun } from "lucide-react";
 import { NewChatDialog } from "./new-chat-dialog";
 import ChatList from "../chat/ChatList";
 import { useTheme } from "next-themes";
+import ProfileDialog from "./profile-dialog";
 
 export function ChatSidebar() {
     const user = useAuthStore((state) => state.user);
@@ -51,7 +52,8 @@ export function ChatSidebar() {
                         </div>
                         <div className="flex flex-col items-start">
                             <p className="text-primary-foreground text-lg">{user?.name}</p>
-                            <p className="text-secondary text-sm cursor-pointer">change profile photo</p>
+                            <ProfileDialog />
+                            {/* <p className="text-secondary text-sm cursor-pointer">change profile photo</p> */}
                         </div>
                     </div>
                     <div className="flex items-center gap-2">

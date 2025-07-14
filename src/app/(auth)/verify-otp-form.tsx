@@ -46,6 +46,7 @@ export default function VerifyOTPForm() {
             }
             console.log(data);
             updateUser({ isVerified: true }); // Update user state to verified
+            console.log("routing to profile");
 
             router.push("/profile"); // Use router.push instead of redirect
         })

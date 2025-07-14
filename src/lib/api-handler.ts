@@ -59,66 +59,30 @@ api.interceptors.response.use(async function (response) {
 
 
 // Generic API handler function for reusability
-// export async function apiHandler<T = undefined, R = unknown>(
-//     endpoint: string,
-//     data?: T,
-//     method: 'get' | 'post' | 'put' | 'patch' | 'delete' = 'get'
-// ): Promise<ApiResponse<R>> {
-//     try {
-//         let res;
-//         if (method === 'get' || method === 'delete') {
-//             // For GET and DELETE requests, data is passed as params
-//             res = await api[method](endpoint, { params: data });
-//         } else {
-//             // For POST, PUT, PATCH requests, data is passed in the request body
-//             res = await api[method](endpoint, data);
-//         }
-
-//         return {
-//             success: true,
-//             data: res.data
-//         };
-//     } catch (error) {
-//         if (isAxiosError(error) && error.response?.data) {
-//             const errorMessage: string = error.response.data.message || 'Server error occurred';
-//             // console.log(errorMessage);
-
-//             return { success: false, error: errorMessage, data: null };
-//         }
-//         return {
-//             success: false,
-//             data: null,
-//             error: "Something went wrong. Please try again."
-//         };
-//     }
-// }
-
 export async function apiHandler<T = undefined, R = unknown>(
     endpoint: string,
     data?: T,
     method: 'get' | 'post' | 'put' | 'patch' | 'delete' = 'get'
 ): Promise<ApiResponse<R>> {
-    console.log("Calling apiHandler with:", { endpoint, data, method });
     try {
         let res;
         if (method === 'get' || method === 'delete') {
-            console.log("Sending GET/DELETE request to", endpoint);
+            // For GET and DELETE requests, data is passed as params
             res = await api[method](endpoint, { params: data });
         } else {
-            console.log("Sending POST/PUT/PATCH request to", endpoint, "with data:", data);
+            // For POST, PUT, PATCH requests, data is passed in the request body
             res = await api[method](endpoint, data);
         }
-
-        console.log("API response:", res);
 
         return {
             success: true,
             data: res.data
         };
     } catch (error) {
-        console.error("API call error:", error);
         if (isAxiosError(error) && error.response?.data) {
             const errorMessage: string = error.response.data.message || 'Server error occurred';
+            // console.log(errorMessage);
+
             return { success: false, error: errorMessage, data: null };
         }
         return {

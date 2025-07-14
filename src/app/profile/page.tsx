@@ -1,11 +1,16 @@
+"use client"
 import ChooseProfileImg from "@/components/choose-profile-img";
+import { useEffect } from "react";
 
-const page = () => {
+const Page = () => {
+    useEffect(() => {
+        console.log("Profile page rendered");
+    }, []);
     return (
-        <div>
-            <ChooseProfileImg />
+        <div className="flex items-center justify-center h-dvh">
+            <ChooseProfileImg type="new" />
         </div>
     );
 }
 
-export default page;
+export default Page;

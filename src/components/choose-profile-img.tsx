@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useTransition } from "react";
+import { useState, useCallback, useTransition, Dispatch, SetStateAction } from "react";
 import Cropper, { Area } from "react-easy-crop";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -9,8 +9,9 @@ import Image from "next/image";
 import { uploadProfileImg } from "@/app/actions/profile-actions";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "./stores/auth-store";
+import { DialogTitle } from "./ui/dialog";
 
-const ChooseProfileImg = () => {
+const ChooseProfileImg = ({ type, setOpen }: { type: "new" | "existing", setOpen?: Dispatch<SetStateAction<boolean>> }) => {
     const [imageSrc, setImageSrc] = useState<string | null>(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
@@ -64,9 +65,12 @@ const ChooseProfileImg = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-white p-4">
-            <h2 className="text-xl font-bold mb-2 text-blue-600">Choose profile picture</h2>
-            <p className="text-gray-500 mb-4 text-center">Choose a photo that represents you!</p>
+        <div className="rounded-2xl bg-white px-12 py-4 flex flex-col items-center">
+            {/* */}
+            {type === "existing" ? (<DialogTitle className="text-xl font-bold mb-2 text-blue-600 text-center w-full">Choose a profile picture</DialogTitle>) : (<h2 className="text-xl font-bold mb-2 text-blue-600">Choose profile picture</h2>)}
+
+            {type === "new" && <p className="text-gray-500 mb-4 text-center">Choose a photo that represents you!</p>}
+
 
             {/* File picker if no image yet */}
             {!imageSrc && !uploadedUrl && (
@@ -80,7 +84,7 @@ const ChooseProfileImg = () => {
                             className="absolute inset-0 opacity-0 cursor-pointer"
                         />
                     </label>
-                    <div className="cursor-pointer" onClick={() => router.push("/chat")} >
+                    <div className="cursor-pointer" onClick={() => type === "new" ? router.push("/") : setOpen && setOpen(false)} >
 
                         <p className="text-blue-600">Skip</p>
                     </div>
@@ -149,7 +153,7 @@ const ChooseProfileImg = () => {
                         Re-upload
                     </Button>
                     <Button
-                        onClick={() => router.push("/")} // or your next onboarding route
+                        onClick={() => type === "new" ? router.push("/") : setOpen && setOpen(false)} // or your next onboarding route
                         className="mt-2 w-40"
                     >
                         Next
