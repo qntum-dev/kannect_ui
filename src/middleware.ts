@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
 
 
 
-    const publicPaths = ['/login', '/register', '/recover', '/bad-request'];
+    const publicPaths = ['/login', '/register', '/recover', '/bad-request', '/home'];
     const exemptPaths = ['/login', '/register', '/bad-request']
     const { pathname } = request.nextUrl
     const url = request.nextUrl.clone();
@@ -66,6 +66,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/((?!_next|favicon.ico|api|turbopack).*)'],
+    matcher: ['/((?!_next|favicon.ico|api|turbopack|.*\\.(?:png|jpg|jpeg|webp|svg|gif)).*)'],
 };
 

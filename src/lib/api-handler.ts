@@ -80,7 +80,7 @@ export async function apiHandler<T = undefined, R = unknown>(
         };
     } catch (error) {
         if (isAxiosError(error) && error.response?.data) {
-            const errorMessage: string = error.response.data.message || 'Server error occurred';
+            const errorMessage: string = error.response.data.message || 'Server is Busy';
             // console.log(errorMessage);
 
             return { success: false, error: errorMessage, data: null };
