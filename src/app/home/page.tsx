@@ -202,7 +202,7 @@ const Page = () => {
 
                 {/* Floating Dashboard Image */}
                 <div className="relative mt-4 lg:mt-12 w-full max-w-4xl px-4">
-                    <div className="rounded-2xl overflow-hidden hidden lg:block shadow-2xl">
+                    <div className="rounded-2xl overflow-hidden hidden md:block shadow-2xl">
                         <Image
                             src="/chat_ui.webp"
                             alt="Kannect Chat UI"
@@ -210,7 +210,7 @@ const Page = () => {
                             height={700}
                         />
                     </div>
-                    <div className="lg:hidden rounded-2xl overflow-hidden shadow-2xl">
+                    <div className="md:hidden rounded-2xl overflow-hidden shadow-2xl">
                         <Image
                             src="/chat_ui_mobile.webp"
                             alt="Kannect Chat UI Mobile"
