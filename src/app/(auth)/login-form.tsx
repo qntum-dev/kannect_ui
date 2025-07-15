@@ -52,7 +52,7 @@ export default function LoginForm() {
                 const user = result.data?.userData;
                 if (user) {
                     login({ user }); // store in Zustand
-                    router.push("/");
+                    router.push("/chat");
                 } else {
                     form.setError("root", {
                         message: "Login failed: Invalid server response",

@@ -22,7 +22,7 @@ export function ChatSidebar() {
 
         useAuthStore.getState().logout();
 
-        window.location.href = '/home';
+        window.location.href = '/';
     }
     return (
         <Sidebar>

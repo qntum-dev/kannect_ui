@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
 
 
 
-    const publicPaths = ['/login', '/register', '/recover', '/bad-request', '/home'];
+    const publicPaths = ['/login', '/register', '/recover', '/bad-request', "/"];
     const exemptPaths = ['/login', '/register', '/bad-request']
     const { pathname } = request.nextUrl
     const url = request.nextUrl.clone();
@@ -37,7 +37,7 @@ export async function middleware(request: NextRequest) {
             console.log(verify, "line 36");
 
             if (verify.data?.status === "verified") {
-                url.pathname = "/";
+                url.pathname = "/chat";
                 return NextResponse.redirect(url);
             }
             return NextResponse.next();

@@ -84,7 +84,7 @@ const ChooseProfileImg = ({ type, setOpen }: { type: "new" | "existing", setOpen
                             className="absolute inset-0 opacity-0 cursor-pointer"
                         />
                     </label>
-                    <div className="cursor-pointer" onClick={() => type === "new" ? router.push("/") : setOpen && setOpen(false)} >
+                    <div className="cursor-pointer" onClick={() => type === "new" ? router.push("/chat") : setOpen && setOpen(false)} >
 
                         <p className="text-blue-600">Skip</p>
                     </div>
@@ -153,7 +153,7 @@ const ChooseProfileImg = ({ type, setOpen }: { type: "new" | "existing", setOpen
                         Re-upload
                     </Button>
                     <Button
-                        onClick={() => type === "new" ? router.push("/") : setOpen && setOpen(false)} // or your next onboarding route
+                        onClick={() => type === "new" ? router.push("/chat") : setOpen && setOpen(false)} // or your next onboarding route
                         className="mt-2 w-40"
                     >
                         Next
