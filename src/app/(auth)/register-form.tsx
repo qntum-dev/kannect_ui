@@ -14,30 +14,24 @@ import {
 import { Input } from "@/components/ui/input"
 import { useState, useTransition } from "react"
 import { Eye, EyeOff, Loader2 } from "lucide-react"
-
 import { useRouter } from "next/navigation"
 import { registerSchema, RegisterSchemaType } from "@/lib/types"
 import { registerAction } from "../actions/auth-actions"
 import { useAuthStore } from "@/components/stores/auth-store"
 
-
-
-
-
 export default function RegisterForm() {
     const [showPassword, setShowPassword] = useState(false)
-    const [isPending, startTransition] = useTransition();
-    const login = useAuthStore((state) => state.login);
-
-    const router = useRouter(); // Use router for navigation
+    const [isPending, startTransition] = useTransition()
+    const login = useAuthStore((state) => state.login)
+    const router = useRouter()
 
     const form = useForm<RegisterSchemaType>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
             email: "",
             name: "",
-            password: ""
-        }
+            password: "",
+        },
     })
 
     const onSubmit = async (values: RegisterSchemaType) => {
@@ -45,44 +39,48 @@ export default function RegisterForm() {
             const result = await registerAction(values)
 
             if (result.error) {
-                console.log("Error:", result.error)
-
                 form.setError("root", {
                     message: result.error,
                 })
             } else {
-                // You could redirect, show toast, etc.
-                const user = result.data?.userData;
+                const user = result.data?.userData
                 if (user) {
-                    login({ user }); // store in Zustand
-                    router.push("/verify"); // Use router.push instead of redirect
-
+                    login({ user })
+                    router.push("/verify")
                 } else {
                     form.setError("root", {
-                        message: "Login failed: Invalid server response",
-                    });
+                        message: "Registration failed: Invalid server response",
+                    })
                 }
             }
         })
-
     }
+
     return (
-        <div className="w-full max-w-sm ">
+        <div className="w-full h-screen flex justify-center items-center bg-gray-950">
             <Form {...form}>
-                <form className="flex flex-col gap-6 bg-secondary p-4 rounded-md" onSubmit={form.handleSubmit(onSubmit)}>
-                    <h2 className="text-xl font-bold text-center">
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="flex flex-col gap-6 p-6 w-full max-w-sm rounded-lg shadow-md bg-gray-900 text-gray-100"
+                >
+                    <h2 className="text-2xl font-semibold text-center">
                         Create Your Account
                     </h2>
+
                     <FormField
                         control={form.control}
                         name="name"
                         disabled={isPending}
-
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Full Name</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Enter name e.g. John Doe" {...field} required autoComplete="name" />
+                                    <Input
+                                        placeholder="John Doe"
+                                        {...field}
+                                        required
+                                        autoComplete="name"
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -90,15 +88,19 @@ export default function RegisterForm() {
                     />
 
                     <FormField
-                        disabled={isPending}
-
                         control={form.control}
                         name="email"
+                        disabled={isPending}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Email Address</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Enter your email address" {...field} required autoComplete="email" />
+                                    <Input
+                                        placeholder="you@example.com"
+                                        {...field}
+                                        required
+                                        autoComplete="email"
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -109,17 +111,24 @@ export default function RegisterForm() {
                         control={form.control}
                         name="password"
                         disabled={isPending}
-
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Password</FormLabel>
                                 <FormControl>
                                     <div className="relative">
-
-                                        <Input placeholder="Enter your password" {...field} required type={showPassword ? "text" : "password"} autoComplete="current-password" />
-                                        <button type="button" onClick={() => {
-                                            setShowPassword((prev) => !prev)
-                                        }} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                                        <Input
+                                            placeholder="Enter your password"
+                                            {...field}
+                                            type={showPassword ? "text" : "password"}
+                                            autoComplete="new-password"
+                                            required
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPassword((prev) => !prev)}
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200 focus:outline-none"
+                                            disabled={isPending}
+                                        >
                                             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                         </button>
                                     </div>
@@ -128,12 +137,17 @@ export default function RegisterForm() {
                             </FormItem>
                         )}
                     />
+
                     {form.formState.errors.root && (
-                        <div className="text-red-500 text-sm">
+                        <div className="text-red-400 text-sm text-center">
                             {form.formState.errors.root.message}
                         </div>
                     )}
-                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-800 cursor-pointer text-white text-base" disabled={isPending}
+
+                    <Button
+                        type="submit"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition disabled:opacity-50"
+                        disabled={isPending}
                     >
                         {isPending ? (
                             <>
@@ -145,11 +159,14 @@ export default function RegisterForm() {
                         )}
                     </Button>
 
-                    <hr className="border-t border-gray-400 w-full" />
-                    <div className="text-center">
-                        Already have an account? {" "}
-                        <a href="/login" className="text-blue-400 hover:text-blue-600">
-
+                    <hr className="border-t border-gray-700 w-full" />
+                    <div className="text-center text-sm text-gray-300">
+                        Already have an account?{" "}
+                        <a
+                            href="/login"
+                            className="text-blue-400 hover:text-blue-300 font-medium"
+                            tabIndex={isPending ? -1 : 0}
+                        >
                             Log in
                         </a>
                     </div>
@@ -157,5 +174,4 @@ export default function RegisterForm() {
             </Form>
         </div>
     )
-
 }

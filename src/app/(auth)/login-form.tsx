@@ -15,58 +15,54 @@ import { Input } from "@/components/ui/input"
 import { useState, useTransition } from "react"
 import { Eye, EyeOff, Loader2 } from "lucide-react"
 import { loginAction } from "../actions/auth-actions"
-import { } from "next/navigation"
 import { useRouter } from "next/navigation"
 import { loginSchema, LoginSchemaType } from "@/lib/types"
 import { useAuthStore } from "@/components/stores/auth-store"
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false)
-    const [isPending, startTransition] = useTransition() // Add transition state
-    const login = useAuthStore((state) => state.login);
-
-    const router = useRouter(); // Use router for navigation
+    const [isPending, startTransition] = useTransition()
+    const login = useAuthStore((state) => state.login)
+    const router = useRouter()
 
     const form = useForm<LoginSchemaType>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
             email: "",
-            password: ""
-        }
+            password: "",
+        },
     })
-
-
 
     const onSubmit = async (values: LoginSchemaType) => {
         startTransition(async () => {
             const result = await loginAction(values)
 
             if (result.error) {
-                console.log("Error:", result.error)
-
                 form.setError("root", {
                     message: result.error,
                 })
             } else {
-                console.log("Success:", result.data)
-                const user = result.data?.userData;
+                const user = result.data?.userData
                 if (user) {
-                    login({ user }); // store in Zustand
-                    router.push("/chat");
+                    login({ user })
+                    router.push("/chat")
                 } else {
                     form.setError("root", {
                         message: "Login failed: Invalid server response",
-                    });
+                    })
                 }
             }
         })
     }
 
     return (
-        <div className="w-full max-w-sm">
+        <div className="w-full h-screen flex justify-center items-center bg-gray-950">
             <Form {...form}>
-                <form className="flex flex-col gap-6  p-4 rounded-md bg-secondary" onSubmit={form.handleSubmit(onSubmit)}>
-                    <h2 className="text-xl font-bold text-center">
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="flex flex-col gap-6 p-6 w-full max-w-sm rounded-lg shadow-md bg-gray-900 text-gray-100"
+                >
+                    <h2 className="text-2xl font-semibold text-center">
                         Log in to Your Account
                     </h2>
 
@@ -78,7 +74,7 @@ export default function LoginForm() {
                                 <FormLabel>Email Address</FormLabel>
                                 <FormControl>
                                     <Input
-                                        placeholder="Enter your email address"
+                                        placeholder="Enter your email"
                                         {...field}
                                         required
                                         autoComplete="email"
@@ -101,15 +97,15 @@ export default function LoginForm() {
                                         <Input
                                             placeholder="Enter your password"
                                             {...field}
-                                            required
                                             type={showPassword ? "text" : "password"}
                                             autoComplete="current-password"
                                             disabled={isPending}
+                                            required
                                         />
                                         <button
                                             type="button"
                                             onClick={() => setShowPassword((prev) => !prev)}
-                                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200 focus:outline-none"
                                             disabled={isPending}
                                         >
                                             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -122,14 +118,14 @@ export default function LoginForm() {
                     />
 
                     {form.formState.errors.root && (
-                        <div className="text-red-500 text-sm">
+                        <div className="text-red-400 text-sm text-center">
                             {form.formState.errors.root.message}
                         </div>
                     )}
 
                     <Button
                         type="submit"
-                        className="w-full bg-blue-600 hover:bg-blue-800 cursor-pointer text-white text-base"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition disabled:opacity-50"
                         disabled={isPending}
                     >
                         {isPending ? (
@@ -142,10 +138,14 @@ export default function LoginForm() {
                         )}
                     </Button>
 
-                    <hr className="border-t border-gray-400 w-full" />
-                    <div className="text-center">
-                        <span>Don&apos;t have an account? </span>
-                        <a href="/register" className="text-blue-400 hover:text-blue-600" tabIndex={isPending ? -1 : 0}>
+                    <hr className="border-t border-gray-700 w-full" />
+                    <div className="text-center text-sm text-gray-300">
+                        Don&apos;t have an account?{" "}
+                        <a
+                            href="/register"
+                            className="text-blue-400 hover:text-blue-300 font-medium"
+                            tabIndex={isPending ? -1 : 0}
+                        >
                             Sign Up
                         </a>
                     </div>

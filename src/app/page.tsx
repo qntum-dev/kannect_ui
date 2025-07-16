@@ -107,7 +107,7 @@ const Page = () => {
 
         <div className="flex items-center gap-2">
 
-          <a href={user ? "/" : "/register"}>
+          <a href={user ? "/chat" : "/register"}>
             {/* <Button variant="outline" className="bg-primary cursor-pointer rounded-full">
               {user ? "Go to Chat" : "Sign Up"}
             </Button> */}
@@ -251,7 +251,7 @@ const Page = () => {
         </p>
 
         {/* Frontend part */}
-        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-6 items-center">
+        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-6 items-center ">
           {tools.forntend.map((tool, index) => (
             <div key={index} className="flex flex-col items-center gap-2">
               <a href={tool.link} target="_blank" rel="noopener noreferrer" className="w-24 h-24 bg-white rounded-lg p-2">
@@ -263,7 +263,7 @@ const Page = () => {
                   className="w-full h-full"
                 />
               </a>
-              <p className="text-base text-neutral-600 dark:text-neutral-400">
+              <p className="text-neutral-400">
                 {tool.name}
               </p>
             </div>
@@ -280,7 +280,7 @@ const Page = () => {
                   className="w-full h-full"
                 />
               </a>
-              <p className="text-base text-neutral-600 dark:text-neutral-400">
+              <p className="text-neutral-400">
                 {tool.name}
               </p>
             </div>
@@ -302,7 +302,7 @@ const Page = () => {
         </p>
         <div className="w-full  rounded-xl overflow-hidden shadow-lg">
           <Image
-            src="/encore.webp"
+            src="/encore.png"
             alt="Encore.dev Screenshot"
             width={1200}
             height={700}
