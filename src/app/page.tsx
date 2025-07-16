@@ -38,7 +38,7 @@ const Page = () => {
       {
         "name": "zustand",
         "description": "A small, fast and scalable bearbones state-management solution.",
-        "link": "https://github.com/pmndrs/zustand",
+        "link": "https://zustand-demo.pmnd.rs/",
         "icon": "/zustand.svg"
       },
       {
@@ -50,7 +50,7 @@ const Page = () => {
       {
         name: "axios",
         description: "Promise based HTTP client for the browser and node.js",
-        link: "https://github.com/axios/axios",
+        link: "https://axios-http.com",
         icon: "/axios.svg"
       }
     ],
@@ -59,7 +59,7 @@ const Page = () => {
         "name": "Encore TS",
         "description": "Type-safe, scalable backend services.",
         "link": "https://encore.dev",
-        "icon": "/encoredev.jpg"
+        "icon": "/encore.svg"
       },
       {
         "name": "postgres",
@@ -245,10 +245,10 @@ const Page = () => {
         </p>
 
         {/* Frontend part */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 items-center">
+        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-6 items-center">
           {tools.forntend.map((tool, index) => (
             <div key={index} className="flex flex-col items-center gap-2">
-              <div className="w-24 h-24 bg-white rounded-lg p-2">
+              <a href={tool.link} target="_blank" rel="noopener noreferrer" className="w-24 h-24 bg-white rounded-lg p-2">
                 <Image
                   src={"/tools" + tool.icon}
                   alt={tool.name}
@@ -256,7 +256,7 @@ const Page = () => {
                   height={24}
                   className="w-full h-full"
                 />
-              </div>
+              </a>
               <p className="text-base text-neutral-600 dark:text-neutral-400">
                 {tool.name}
               </p>
@@ -265,7 +265,7 @@ const Page = () => {
 
           {tools.backend.map((tool, index) => (
             <div key={index} className="flex flex-col items-center gap-2">
-              <div className="w-24 h-24 bg-white rounded-lg p-2">
+              <a href={tool.link} target="_blank" rel="noopener noreferrer" className="w-24 h-24 bg-white rounded-lg p-2">
                 <Image
                   src={"/tools" + tool.icon}
                   alt={tool.name}
@@ -273,7 +273,7 @@ const Page = () => {
                   height={24}
                   className="w-full h-full"
                 />
-              </div>
+              </a>
               <p className="text-base text-neutral-600 dark:text-neutral-400">
                 {tool.name}
               </p>
