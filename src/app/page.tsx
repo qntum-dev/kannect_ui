@@ -185,7 +185,7 @@ const Page = () => {
 `}</style>
       {/* Page Content */}
       <div className="px-6 lg:px-64 flex flex-col gap-6 justify-center items-center text-center pt-32 bg-[radial-gradient(circle,_rgba(255,255,255,0.05)_1px,_transparent_1px)] [background-size:40px_40px]">
-        <div className="text-3xl lg:text-6xl font-bold max-w-2xl">
+        <div className="text-3xl lg:text-6xl font-bold lg:max-w-2xl">
           “A simple, instant way to chat with anyone.”
         </div>
         <div className="flex flex-col items-center gap-4 max-w-md">
@@ -201,21 +201,38 @@ const Page = () => {
 
         {/* Floating Dashboard Image */}
         <div className="relative mt-4 lg:mt-12 w-full max-w-4xl px-4">
-          <div className="rounded-2xl overflow-hidden hidden md:block shadow-2xl">
+          <div className="relative rounded-2xl overflow-hidden hidden md:block shadow-2xl w-full h-auto">
+
             <Image
-              src="/chat_ui.webp"
+              src="/hero_ui.webp"
               alt="Kannect Chat UI"
               width={1200}
-              height={700}
+              height={500}
+              loading="eager"
+              // priority={true}
+
+              sizes="100vw"
+              style={{
+                maxWidth: "100%",
+                height: "auto",
+              }}
+            // className="object-cover" // or object-contain
+
+            // height={400}
             />
           </div>
-          <div className="md:hidden rounded-2xl overflow-hidden shadow-2xl">
+          <div className="md:hidden rounded-2xl overflow-hidden shadow-2xl h-full w-auto">
             <Image
               src="/chat_ui_mobile.webp"
               alt="Kannect Chat UI Mobile"
+              // loading="eager"
               width={400}
               height={300}
-              unoptimized
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              sizes="100vw"
             />
           </div>
         </div>
@@ -279,11 +296,16 @@ const Page = () => {
         </p>
         <div className="w-full max-w-2xl rounded-xl overflow-hidden shadow-lg">
           <Image
-            src="/encore.png"
+            src="/encore.webp"
             alt="Encore.dev Screenshot"
             width={1200}
             height={700}
             className="w-full h-auto object-cover"
+            style={{
+              width: "100%",
+              height: "auto",
+            }}
+            sizes="100vw"
           />
         </div>
       </section>

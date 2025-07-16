@@ -9,8 +9,8 @@ export async function middleware(request: NextRequest) {
 
 
 
-    const publicPaths = ['/login', '/register', '/recover', '/bad-request', "/"];
-    const exemptPaths = ['/login', '/register', '/bad-request']
+    const publicPaths = ['/login', '/register', '/recover', '/bad-request', "/", "/robots.txt", "/sitemap.xml"];
+    const exemptPaths = ['/login', '/register', '/bad-request'];
     const { pathname } = request.nextUrl
     const url = request.nextUrl.clone();
 
