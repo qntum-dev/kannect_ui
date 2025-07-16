@@ -92,7 +92,7 @@ const Page = () => {
 
 
   return (
-    <div className="relative bg-secondary text-white min-h-screen overflow-x-hidden">
+    <div className="relative bg-[#1f2736] text-white min-h-screen overflow-x-hidden">
 
       {/* Fixed Navbar */}
       <div className="fixed top-0 left-0 w-full flex justify-between items-center px-6 lg:px-64 py-4 backdrop-blur-md bg-[#030a17] z-50 border-b border-white/10">
@@ -108,9 +108,12 @@ const Page = () => {
         <div className="flex items-center gap-2">
 
           <a href={user ? "/" : "/register"}>
-            <Button variant="outline" className="bg-primary cursor-pointer rounded-full">
+            {/* <Button variant="outline" className="bg-primary cursor-pointer rounded-full">
               {user ? "Go to Chat" : "Sign Up"}
-            </Button>
+            </Button> */}
+            <button className="border bg-[#353535]/30 shadow-xs  hover:text-[#fafafa] dark:bg-input/30 dark:border-[#353535] hover:bg-[#353535]/50 px-4 py-1 rounded-full cursor-pointer">
+              {user ? "Go to Chat" : "Sign Up"}
+            </button>
           </a>
 
           {/* Hamburger on Mobile */}
@@ -193,7 +196,7 @@ const Page = () => {
             Enjoy realtime messaging with a clean interface you’ll love.
           </div>
           <a href={"/register"}>
-            <Button className="cursor-pointer max-w-min rounded-full px-8 hover:scale-105 transition-transform">
+            <Button className="cursor-pointer max-w-min rounded-full px-8 hover:scale-105 transition-transform bg-white hover:bg-white/90 text-[#353535]">
               Try It Now <ArrowUpRight className="ml-2 w-4 h-4" />
             </Button>
           </a>

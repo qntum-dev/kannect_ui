@@ -69,7 +69,7 @@ export default function RegisterForm() {
     return (
         <div className="w-full max-w-sm ">
             <Form {...form}>
-                <form className="flex flex-col gap-6 bg-[#1f2736] p-4 rounded-md" onSubmit={form.handleSubmit(onSubmit)}>
+                <form className="flex flex-col gap-6 bg-secondary p-4 rounded-md" onSubmit={form.handleSubmit(onSubmit)}>
                     <h2 className="text-xl font-bold text-center">
                         Create Your Account
                     </h2>
