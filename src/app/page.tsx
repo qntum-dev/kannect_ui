@@ -200,8 +200,8 @@ const Page = () => {
         </div>
 
         {/* Floating Dashboard Image */}
-        <div className="relative mt-4 lg:mt-12 w-full max-w-4xl px-4">
-          <div className="relative rounded-2xl overflow-hidden hidden md:block shadow-2xl w-full h-auto">
+        <div className="mt-4 lg:mt-12 w-full max-w-4xl px-4">
+          <div className="rounded-2xl overflow-hidden hidden md:block shadow-2xl w-full h-auto">
 
             <Image
               src="/hero_ui.webp"
