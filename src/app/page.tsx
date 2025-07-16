@@ -30,13 +30,13 @@ const Page = () => {
         "icon": "/next.svg"
       },
       {
-        "name": "tailwindcss",
+        "name": "Tailwindcss",
         "description": "A utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup.",
         "link": "https://tailwindcss.com/",
         "icon": "/tailwind.svg"
       },
       {
-        "name": "zustand",
+        "name": "Zustand",
         "description": "A small, fast and scalable bearbones state-management solution.",
         "link": "https://zustand-demo.pmnd.rs/",
         "icon": "/zustand.svg"
@@ -48,7 +48,7 @@ const Page = () => {
         "icon": "/tanstack.png"
       },
       {
-        name: "axios",
+        name: "Axios",
         description: "Promise based HTTP client for the browser and node.js",
         link: "https://axios-http.com",
         icon: "/axios.svg"
@@ -56,13 +56,13 @@ const Page = () => {
     ],
     "backend": [
       {
-        "name": "Encore TS",
+        "name": "Encore.dev",
         "description": "Type-safe, scalable backend services.",
         "link": "https://encore.dev",
         "icon": "/encore.svg"
       },
       {
-        "name": "postgres",
+        "name": "Postgres",
         "description": "Reliable relational database.",
         "link": "https://www.postgresql.org/",
         "icon": "/postgres.svg"
@@ -80,7 +80,7 @@ const Page = () => {
         "icon": "/cloudinary.svg"
       },
       {
-        "name": "redis",
+        "name": "Redis",
         "description": "In-memory data structure store, used as a database, cache, and message broker.",
         "link": "https://redis.io/",
         "icon": "/redis.svg"
@@ -115,9 +115,9 @@ const Page = () => {
 
           {/* Hamburger on Mobile */}
           <div className="md:hidden">
-            <button onClick={() => setSidebarOpen(true)}>
+            <Button aria-label="Open sidebar" onClick={() => setSidebarOpen(true)}>
               <Menu className="w-6 h-6" />
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -209,7 +209,7 @@ const Page = () => {
               width={1200}
               height={500}
               loading="eager"
-              // priority={true}
+              priority={true}
 
               sizes="100vw"
               style={{
@@ -225,14 +225,17 @@ const Page = () => {
             <Image
               src="/chat_ui_mobile.webp"
               alt="Kannect Chat UI Mobile"
-              // loading="eager"
-              width={400}
-              height={300}
+              width={164}    // aspect-correct width
+              height={300}   // desired display height
+              loading="eager"
+
+              // fill
               style={{
                 width: "100%",
-                height: "auto",
+                height: "100%",
               }}
-              sizes="100vw"
+              // sizes="100vw"
+              priority={true}
             />
           </div>
         </div>
@@ -294,7 +297,7 @@ const Page = () => {
         <p className="text-base text-neutral-300 max-w-4xl">
           <a href="https://encore.dev" target="_blank" rel="noopener noreferrer" className="underline hover:text-white transition-colors">Encore.dev</a> is an open-source TypeScript backend framework that helps you build robust, type-safe APIs without boilerplate and with zero npm dependencies. It allows you to focus on your product by handling API design, infrastructure, and scalability out of the box.
         </p>
-        <div className="w-full max-w-2xl rounded-xl overflow-hidden shadow-lg">
+        <div className="w-full  rounded-xl overflow-hidden shadow-lg">
           <Image
             src="/encore.webp"
             alt="Encore.dev Screenshot"
