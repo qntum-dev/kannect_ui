@@ -7,7 +7,7 @@ const Page = () => {
         console.log("Profile page rendered");
     }, []);
     return (
-        <div className="flex items-center justify-center h-dvh">
+        <div className="flex items-center justify-center h-dvh bg-gray-950">
             <ChooseProfileImg type="new" />
         </div>
     );

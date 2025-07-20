@@ -65,11 +65,11 @@ const ChooseProfileImg = ({ type, setOpen }: { type: "new" | "existing", setOpen
     };
 
     return (
-        <div className="rounded-2xl bg-white px-12 py-4 flex flex-col items-center">
+        <div className="rounded-2xl bg-gray-900 px-12 py-4 flex flex-col items-center">
             {/* */}
-            {type === "existing" ? (<DialogTitle className="text-xl font-bold mb-2 text-blue-600 text-center w-full">Choose a profile picture</DialogTitle>) : (<h2 className="text-xl font-bold mb-2 text-blue-600">Choose profile picture</h2>)}
+            {type === "existing" ? (<DialogTitle className="text-xl font-bold mb-2 text-blue-400 text-center w-full">Choose a profile picture</DialogTitle>) : (<h2 className="text-xl font-bold mb-2 text-blue-400">Choose profile picture</h2>)}
 
-            {type === "new" && <p className="text-gray-500 mb-4 text-center">Choose a photo that represents you!</p>}
+            {type === "new" && <p className="text-gray-300 mb-4 text-center">Choose a photo that represents you!</p>}
 
 
             {/* File picker if no image yet */}
@@ -86,7 +86,7 @@ const ChooseProfileImg = ({ type, setOpen }: { type: "new" | "existing", setOpen
                     </label>
                     <div className="cursor-pointer" onClick={() => type === "new" ? router.push("/chat") : setOpen && setOpen(false)} >
 
-                        <p className="text-blue-600">Skip</p>
+                        <p className="text-red-600 text-lg">Skip</p>
                     </div>
                 </div>
             )}

@@ -53,9 +53,9 @@ export default function VerifyOTPForm() {
 
     }
     return (
-        <div className="h-dvh flex items-center justify-center">
+        <div className="h-dvh flex items-center justify-center bg-gray-950 w-full">
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 border border-black p-4 rounded-md">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 border border-black p-4 rounded-md bg-gray-900">
                     <h1 className="text-xl font-bold">Verify your account</h1>
                     <FormField
                         disabled={isPending}
@@ -86,7 +86,7 @@ export default function VerifyOTPForm() {
                     {errMSG && <>
                         <p className="text-red-600">{errMSG}</p>
                     </>}
-                    <Button type="submit" className="bg-blue-600 cursor-pointer"
+                    <Button type="submit" className="bg-blue-600 hover:bg-blue-500 cursor-pointer text-white"
                         disabled={isPending}
                     >{
                             isPending ? <>

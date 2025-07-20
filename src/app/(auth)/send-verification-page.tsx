@@ -28,7 +28,7 @@ const VerifyPage = () => {
     }
 
     return (
-        <div className="h-dvh flex items-center justify-center">
+        <div className="h-dvh flex items-center justify-center bg-gray-950">
 
             {showVerifyOTPForm
                 ?
@@ -37,15 +37,15 @@ const VerifyPage = () => {
 
                 :
 
-                <div className="flex flex-col justify-center items-center gap-4">
-                    <h1 className="text-xl font-bold">
+                <div className="flex flex-col justify-center items-center gap-4 lg:gap-6">
+                    <h1 className="text-xl lg:text-4xl font-bold text-center">
 
-                        You Are not Verified Please Verify your Account
+                        Please Verify your Account
                     </h1>
                     {ErrMSG && <div className="text-red-500 text-sm">
                         {ErrMSG}
                     </div>}
-                    <Button className="bg-blue-600 cursor-pointer" disabled={isPending}
+                    <Button className="bg-blue-600 text-white cursor-pointer hover:bg-blue-500" disabled={isPending}
                         onClick={onSendOTP}>{
 
                             isPending ? <>
